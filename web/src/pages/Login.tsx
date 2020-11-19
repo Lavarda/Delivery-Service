@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { AuthForm, ContainerLogin, TextToRegister } from '../Styles/LoginStyled';
 import { ContainerButtons } from '../Styles/ButtonsStyled';
 import { onLogin } from '../api/auth_api';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 function Login() {
+
+
+    let Navigation = useHistory();
 
     const [ { username, password }, setCredentials] = useState({
         username: '',
@@ -24,6 +27,9 @@ function Login() {
         //if ( !response ) {
         //    setError(response)
         //}
+
+        // Se o usuário for certo navegar para home
+        Navigation.push('/home')
     }
 
     return (
