@@ -5,9 +5,27 @@ import {
     HorizontalList,
     LinkStyled,
 } from './NavBarStyle';
+
+import Buttons from '../Buttons/Buttons'
 import { FaBars } from 'react-icons/fa'
 
-const NavBar = () => {
+const NavBar = (props) => {
+
+    let pages = props.type == 'landing_page' ? [
+        {
+            name: 'Entregador',
+            route: '/',
+        },
+        {
+            name: 'Empresa',
+            route: '/',
+        },
+        {
+            name: 'Cliente',
+            route: '/',
+        }
+    ] : []
+
     return (
         <header>
             <Container> 
@@ -15,15 +33,18 @@ const NavBar = () => {
                     <img src="https://logodownload.org/wp-content/uploads/2017/05/ifood-logo-0.png" alt="Logo"/>
                 </ImageContainer>
                 <HorizontalList>
-                    <li>
-                        <LinkStyled to="/">Entregador</LinkStyled>
-                    </li>
-                    <li>
-                        <LinkStyled to="/">Empresa</LinkStyled>
-                    </li>
-                    <li>
-                        <LinkStyled to="/">Cliente</LinkStyled>
-                    </li>
+                    {pages.map( (page,index) => {
+                        return (
+                            <li>
+                               <LinkStyled to={page.route}> {page.name} </LinkStyled>
+                            </li>
+                        )
+                    })}
+                    {props.type == 'landing_page' &&
+                        <li>
+                            <Buttons variant="outlined" color="primary" size="large" route="/login"> Entrar </Buttons>
+                        </li>
+                    }
                 </HorizontalList>
             </Container>
         </header>

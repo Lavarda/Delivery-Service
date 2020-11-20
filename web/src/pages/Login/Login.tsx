@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { AuthForm, ContainerLogin, TextToRegister } from '../Styles/LoginStyled';
-import { ContainerButtons } from '../Styles/ButtonsStyled';
-import { onLogin } from '../api/auth_api';
+import { AuthForm, ContainerLogin, TextToRegister } from './LoginStyled';
+import { ContainerButtons } from '../../style/ButtonsStyled';
+import { onLogin } from '../../api/auth_api';
 import { Link, useHistory } from 'react-router-dom';
 
 function Login() {
@@ -29,7 +29,7 @@ function Login() {
         //}
 
         // Se o usuário for certo navegar para home
-        Navigation.push('/home')
+        Navigation.push('/')
     }
 
     return (

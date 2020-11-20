@@ -5,11 +5,11 @@ import {
     Route,
 } from "react-router-dom";
 
-import Login from './pages/Login'
-import RegisterPage from './pages/RegisterPage'
-import HomePage from './pages/Home'
+import Login from './pages/Login/Login'
+import RegisterPage from './pages/Register/RegisterPage'
+import LandingPage from './pages/LandingPage/LandingPage'
 
-import GlobalStyle from './Styles/global'
+import GlobalStyle from './style/global'
 import { ThemeProvider } from 'styled-components'
 import theme from './mocks/Color'
 
@@ -19,7 +19,8 @@ function Routes() {
         <ThemeProvider theme={theme}>
             <BrowserRouter>
                 <Switch>
-                    <Route path="/" exact component={HomePage}></Route>
+                    <Route path="/" exact component={LandingPage}></Route>
+                    <Route path="/login" component={Login}></Route>
                 </Switch>
                 <GlobalStyle />
             </BrowserRouter>

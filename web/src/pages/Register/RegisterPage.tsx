@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { onRegister } from '../api/auth_api';
-import { AuthForm } from '../Styles/LoginStyled';
+import { onRegister } from '../../api/auth_api';
+import { AuthForm } from '../Login/LoginStyled';
 
 const RegisterPage = () => {
 

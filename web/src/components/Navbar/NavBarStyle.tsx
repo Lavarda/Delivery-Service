@@ -34,17 +34,25 @@ export const HorizontalList = styled.ul`
     position: absolute;
     right: 5vw;
 
+    font-size: 1.20rem;
+    font-weight: 400;
+
     li {
+        justify-content: center;
+        align-self: center; 
+
         list-style-type: none;
 
-        margin-left: 2vw;
-        
-        font-size: 1.20rem;
-        font-weight: 400;
+        margin-left: 3.5vw;
     }
+
 `
 
 export const LinkStyled = styled(Link)`
-    color: black;
+    color: ${(props) => props.theme.colors.black} !important; 
     text-decoration: none;
+
+    &:hover {
+        color: ${(props) => props.theme.colors.primary} !important; 
+    }
 `
