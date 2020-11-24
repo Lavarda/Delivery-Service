@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 
-import NavBar from '../../components/Navbar/NavBar'
+import { Container } from './LandingPageStyle'
 
 const LandingPage = () => {
 
     return (
-        <div>
-            <NavBar type="landing_page"></NavBar>
-        </div>
+        <Container>
+            <div>
+                teste
+            </div>
+        </Container>
     );
 }
 

@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
-    background-color: ${(props) => props.theme.colors.background} !important;
-    height: 10vh;
+    background-color: ${(props) => props.theme.colors.yellow} !important;
+    height: 8vh;
     width: 100%;
 
     display: flex;
@@ -51,6 +51,13 @@ export const HorizontalList = styled.ul`
 export const LinkStyled = styled(Link)`
     color: ${(props) => props.theme.colors.black} !important; 
     text-decoration: none;
+
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+    padding: 12px;
+    border-radius: 25px !important;
+
+    background-color: ${(props) => props.theme.colors.white};
 
     &:hover {
         color: ${(props) => props.theme.colors.primary} !important; 
