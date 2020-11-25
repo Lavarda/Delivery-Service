@@ -14,18 +14,18 @@ interface LoginApiResponse {
 }
 
 export const onLogin = async (data: Credentials) => {
-    //const requestConfig:AxiosRequestConfig = {
+    // const requestConfig:AxiosRequestConfig = {
     //    method: 'post',
     //    url: process.env.REACT_APP_API_BASE_URL + '/login',
     //     data
-     // }
+    //  }
 
-    //try {
-    //const { data: response } = await Axios.request(requestConfig);
-    //} catch (e) {
+    // try {
+    // const { data: response } = await Axios.request(requestConfig);
+    // } catch (e) {
     //    console.error(e.response)
     //    return { error: e.response.data.message }
-    //}
+    // }
 
     console.log(data)
 }
