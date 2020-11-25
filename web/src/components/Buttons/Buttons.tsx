@@ -1,4 +1,3 @@
-import { Portal } from '@material-ui/core';
 import React, { useState, Component } from 'react';
 
 import { ButtonStyledSquare, ButtonStyledRound } from './ButtonsStyle'
