@@ -23,16 +23,6 @@ export const HrStyled = styled.div`
     margin-bottom: 15px;
 `
 
-export const ImageContainer = styled.div`
-
-    margin-right: 20px;
-
-    img {
-        max-width: 15vw;
-        max-height: 4.5vh;
-    }
-`
-
 export const ContainerInline = styled.div`
     display: flex;
     flex-direction: row;

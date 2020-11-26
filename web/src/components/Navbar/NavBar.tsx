@@ -1,7 +1,6 @@
 import React, { useState, Component } from 'react';
 import {
     Container,
-    ImageContainer,
     HorizontalList,
     LinkStyled,
 } from './NavBarStyle';
@@ -11,6 +10,7 @@ import {
 } from "react-router-dom";
 
 import Buttons from '../Buttons/Buttons'
+import Image from '../Image/Image'
 
 const NavBar = (props) => {
 
@@ -36,9 +36,13 @@ const NavBar = (props) => {
         <header>
             { location.pathname == '/login' || location.pathname == '/register' ? null : 
                 <Container> 
-                    <ImageContainer>
-                        <img src="https://logodownload.org/wp-content/uploads/2017/05/ifood-logo-0.png" alt="Logo"/>
-                    </ImageContainer>
+                    <Image 
+                        src="https://logodownload.org/wp-content/uploads/2017/05/ifood-logo-0.png"
+                        width="100vw"
+                        margin_left="5vw"
+                        margin_right="10px"
+                        margin_top="10px"
+                    />
                     <HorizontalList>
                         {pages.map( (page,index) => {
                             return (

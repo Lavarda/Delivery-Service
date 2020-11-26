@@ -17,7 +17,6 @@ export const SearchContainer = styled.div<ContainerProps>`
     height: 4.5vh;
     margin-top: 5vh;
     margin-left: 30vw;
-    position: absolute;
 
     text-align: center;
 
@@ -37,8 +36,9 @@ export const SearchContainer = styled.div<ContainerProps>`
 `
 
 export const SearchInput = styled.input<SearchInput>`
-    width: 90%;
+    width: 88%;
 
+    padding-left: 10px;
     border: none;
     text-align: ${ (props) => props.text.length >= 1 ? 'left' : 'center'};
 

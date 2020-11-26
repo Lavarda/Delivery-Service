@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "prop-types": "^15.7.2"
+    "prop-types": "^15.7.2",
+    "react-items-carousel": "^2.8.0"
   },
   "devDependencies": {
     "@types/prop-types": "^15.7.3"
