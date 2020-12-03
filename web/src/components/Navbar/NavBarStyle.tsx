@@ -9,21 +9,10 @@ export const Container = styled.div`
 
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 
     position: relative;
-`
-
-export const ImageContainer = styled.div`
-
-    position: absolute;
-    left: 5vw;
-
-    img {
-        max-width: 10vw;
-        max-height: 10vh;
-    }
 `
 
 export const HorizontalList = styled.ul`

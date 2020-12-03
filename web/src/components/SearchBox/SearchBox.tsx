@@ -5,6 +5,8 @@ import React, {
 import { FaSearch } from 'react-icons/fa';
 import IconLupa from '../../assets/images/loupe.svg';
 
+import Image from '../../components/Image/Image'
+
 import { 
     SearchContainer,
     SearchInput,
@@ -36,7 +38,13 @@ const SearchBox: React.FC<SearchBoxProps> = ({ ...rest}) => {
     return (
         <div>
             <SearchContainer isFocused={isFocused} isFilled={isFilled} >
-                <img src={IconLupa} width="30" height="50"/>
+                <Image 
+                    src={IconLupa}
+                    width="30"
+                    height="50"
+                    margin_left="10px"
+                    margin_top="8px"
+                />
                 <SearchInput
                     text={textSearch}
                     isFocused={isFocused}
