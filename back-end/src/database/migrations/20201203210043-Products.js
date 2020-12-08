@@ -20,7 +20,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      value : {
+      value_unit : {
         type: Sequelize.INTEGER,
         allowNull: false,
       },

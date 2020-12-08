@@ -18,7 +18,7 @@ module.exports = {
         allowNull: false,
       },
       code : {
-        type: Sequelize.BLOB('long'),
+        type: Sequelize.STRING,
         allowNull: false,
       },
     });

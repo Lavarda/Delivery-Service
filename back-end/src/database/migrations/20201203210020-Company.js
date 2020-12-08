@@ -9,7 +9,7 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
-      start : {
+      stars : {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
@@ -18,7 +18,7 @@ module.exports = {
         allowNull: false,
       },
       description : {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       image : {
