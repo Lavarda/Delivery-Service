@@ -20,7 +20,7 @@ class Orders extends Model {
         this.belongsToMany(models.Users, {
             foreignKey: 'id_order',
             as: 'orders_user',
-            through: 'order_object'
+            through: 'users_orders'
         })
     }
 }

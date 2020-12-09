@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize')
 
-class Company extends Model {
+class Categories extends Model {
     static init(connection) {
         super.init({
             start: DataTypes.INTEGER,
@@ -13,16 +13,12 @@ class Company extends Model {
     }
 
     static associate(models) {
-        this.hasMany(models.Category, {
+        this.belongsToMany(models.Companies, {
             foreignKey: 'id_company',
-            as: 'company_category',
-        })
-
-        this.hasMany(models.Products, {
-            foreignKey: 'id_company',
-            as: 'company_products',
+            as: 'category_company',
+            through: 'company_categories',
         })
     }
 }
 
-module.exports = Company;
+module.exports = Categories;

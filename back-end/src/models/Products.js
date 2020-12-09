@@ -18,7 +18,7 @@ class Products extends Model {
             as: 'product_orders',
         })
 
-        this.belongsTo(models.Company, {
+        this.belongsTo(models.Companies, {
             foreignKey: 'id_company',
             as: 'product_company',
         })

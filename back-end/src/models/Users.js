@@ -6,6 +6,7 @@ class Users extends Model {
             name: DataTypes.STRING,
             email: DataTypes.STRING,
             phone: DataTypes.STRING,
+            password: DataTypes.STRING,
         }, {
             sequelize: connection,
         })
@@ -14,18 +15,24 @@ class Users extends Model {
     static associate(models) {
         this.hasMany(models.Adresses, {
             foreignKey: 'id_user',
-            as: 'user_adresses',
+            as: 'adresses_user',
         })
 
         this.belongsToMany(models.Orders, {
             foreignKey: 'id_user',
             as: 'user_orders',
-            through: 'order_object',
+            through: 'users_orders',
         })
 
         this.hasMany(models.Payments, {
             foreignKey: 'id_user',
             as: 'user_payments'
+        })
+
+        this.belongsToMany(models.Coupons, {
+            foreignKey: 'id_user',
+            as: 'user_coupon',
+            through: 'users_coupons',   
         })
     }
 }

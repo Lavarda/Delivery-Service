@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('company', { 
+    await queryInterface.createTable('companies', { 
       id : {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -23,6 +23,14 @@ module.exports = {
       },
       image : {
         type: Sequelize.BLOB('long'),
+        allowNull: false,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
         allowNull: false,
       },
     });

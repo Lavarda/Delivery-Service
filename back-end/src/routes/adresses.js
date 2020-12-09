@@ -1,10 +1,8 @@
 const express = require('express')
 const routes = express.Router();
 
-routes.get('/adresses/teste', (req,res) => {
-    console.log('Ok')
+const AdressesController = require('../controllers/AdressesController')
 
-    return res.status(200).json({ message: 'Ok'})
-})
+routes.post('/adresses/:id_user/create', AdressesController.create )
 
 module.exports = routes

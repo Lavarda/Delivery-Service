@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('order_object', { 
+    await queryInterface.createTable('users_coupons', { 
       id : {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -16,25 +16,32 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      id_order: {
+      id_coupon : {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Orders', key: 'id'},
+        references: { model: 'Coupons', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      total_value : {
+      id_user_orders: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: { model: 'Users_Orders', key: 'id' },
+        onUpdate: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
-      cod_order: {
-        type: Sequelize.STRING,
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
         allowNull: false,
       },
     });
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('order_object');
+     await queryInterface.dropTable('users_coupons');
   }
 };

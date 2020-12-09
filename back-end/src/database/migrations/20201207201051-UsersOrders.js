@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('payments', { 
+    await queryInterface.createTable('users_orders', { 
       id : {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -16,23 +16,18 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      number_card: {
+      id_order: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'Orders', key: 'id'},
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
+      total_value : {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      cvv_card : {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      expire_date: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      name_holder: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      cpf_cnpj_holder: {
+      cod_order: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -46,7 +41,8 @@ module.exports = {
       },
     });
   },
+
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('payments');
+    await queryInterface.dropTable('users_orders');
   }
 };

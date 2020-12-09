@@ -1,10 +1,10 @@
 const express = require('express')
 const routes = express.Router();
 
-routes.get('/users/teste', (req,res) => {
-    console.log('Ok')
+const UserController = require('../controllers/UserController')
 
-    return res.status(200).json({ message: 'Ok'})
-})
+routes.post('/users/create', UserController.create )
+
+routes.get('/users/list', UserController.list )
 
 module.exports = routes

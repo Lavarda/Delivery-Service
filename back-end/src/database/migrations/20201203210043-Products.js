@@ -12,7 +12,7 @@ module.exports = {
       id_company : {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Company', key: 'id' },
+        references: { model: 'Companies', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
@@ -30,6 +30,14 @@ module.exports = {
       },
       image : {
         type: Sequelize.BLOB('long'),
+        allowNull: false,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
         allowNull: false,
       },
     });

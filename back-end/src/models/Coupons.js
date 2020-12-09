@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize')
 
-class Coupon extends Model {
+class Coupons extends Model {
     static init(connection) {
         super.init({
             value: DataTypes.INTEGER,
@@ -10,6 +10,14 @@ class Coupon extends Model {
             sequelize: connection,
         })
     }
+
+    static associate(models) {
+        this.belongsToMany(models.Users, {
+            foreignKey: 'id_coupon',
+            as: 'coupons_to_users',
+            through: 'users_coupons'   
+        })
+    }
 }
 
-module.exports = Coupon;
+module.exports = Coupons;
