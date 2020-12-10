@@ -3,10 +3,8 @@ const { Model, DataTypes } = require('sequelize')
 class Categories extends Model {
     static init(connection) {
         super.init({
-            start: DataTypes.INTEGER,
-            number_avaliations: DataTypes.INTEGER,
-            description: DataTypes.STRING,
-            image: DataTypes.BLOB('long'),
+            name: DataTypes.STRING,
+            image: DataTypes.BLOB('long')
         }, {
             sequelize: connection,
         })

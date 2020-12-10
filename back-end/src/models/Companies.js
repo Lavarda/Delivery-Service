@@ -3,10 +3,12 @@ const { Model, DataTypes } = require('sequelize')
 class Companies extends Model {
     static init(connection) {
         super.init({
-            start: DataTypes.INTEGER,
+            name: DataTypes.STRING,
+            stars: DataTypes.INTEGER,
             number_avaliations: DataTypes.INTEGER,
             description: DataTypes.STRING,
             image: DataTypes.BLOB('long'),
+            filename: DataTypes.STRING,
         }, {
             sequelize: connection,
         })

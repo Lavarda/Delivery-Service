@@ -9,6 +9,10 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       stars : {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -23,6 +27,10 @@ module.exports = {
       },
       image : {
         type: Sequelize.BLOB('long'),
+        allowNull: false,
+      },
+      filename: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       is_deleted: {
