@@ -6,7 +6,7 @@ const AdressesView = require('../views/Adresses')
 module.exports = {
     async create(req,res) {
         const { id_user } = req.params
-        const { cep, city, neighborhood, state, number} = req.body
+        const { cep, city, neighborhood, state, number } = req.body
 
         const data = {
             cep,
@@ -52,5 +52,57 @@ module.exports = {
                 value: AdressesView.render(adresses)
             })
         }
-    }
+    },
+
+    async edit(req, res) {
+        const { id } = req.params
+
+        const { cep, city, neighborhood, state, number } = req.body
+
+        const adresses = await AdressesModel.findByPk(id)
+
+        if ( adresses ) {
+            adresses.cep = cep != "" ? cep : adresses.cep
+            adresses.city = city != "" ? city : adresses.city
+            adresses.neighborhood = neighborhood != "" ? neighborhood : adresses.neighborhood
+            adresses.state = state != "" ? state : adresses.state
+            adresses.number = number != "" ? number : adresses.number
+
+            await adresses.save() 
+
+            return res.status(200).json({
+                status: 200,
+                message: 'Adress edited successfully',
+                value: AdressesView.render(adresses)
+            })
+        } else {
+            return res.status(204).json({
+                status: 204,
+                message: 'Adresses not found',
+                value: {},
+            })
+        }
+    },
+
+    async delete(req, res) {
+        const { id } = req.params
+
+        const adresses = await AdressesModel.findByPk(id)
+        
+        if ( adresses ) {
+            await adresses.destroy()
+
+            return res.status(200).json({
+                status: 200,
+                message: 'Adresses deleted successfully',
+                value: AdressesView.render(adresses)
+            })
+        } else {
+            return res.status(204).json({
+                status: 204,
+                message: 'Adresses not found',
+                value: {},
+            })
+        }
+    },
 }

@@ -1,9 +1,12 @@
+const { Op, Sequelize, QueryTypes } = require("sequelize");
 const Yup =  require('yup')
 
 const UserModel = require('../models/Users')
 
 const UserView = require('../views/Users')
-const AdressesView = require('../views/Adresses')
+
+const databaseConfig = require('../database/config/config')
+const connection = new Sequelize(databaseConfig);
 
 module.exports = { 
     async create(req, res) {
@@ -61,6 +64,11 @@ module.exports = {
 
     async list (req,res) {
         const users = await UserModel.findAll({
+            where: {
+                is_deleted: {
+                    [Op.eq]: false,
+                },
+            },
             include: { 
                 association : 'adresses_user'
             }
@@ -81,16 +89,72 @@ module.exports = {
         }
     },
 
-    async delete(req, res) {
-        const { id } = req.params;
+    async listUsersDeleted(req,res) {
+        const users = await UserModel.findAll({
+            where: {
+                [Op.or]: {
+                    is_deleted: {
+                        [Op.eq]: true,
+                    },
+                }
+            },
+            include: {
+                association: 'adresses_user'
+            },
+        })
+
+        if ( users ) {
+            return res.status(200).json({
+                status: 200,
+                message: 'Users deleted searched successfully',
+                value: UserView.renderManyUsersAdresses(users)
+            })
+        } else {
+            return res.status(204).json({
+                status: 204,
+                message: 'Users deleted not found',
+                value: {}
+            })
+        }
+    },
+
+    async edit(req, res) {
+        const { id } = req.params
+
+        const { name, email, phone } = req.body
 
         const user = await UserModel.findByPk(id)
 
         if ( user ) {
-            user.destroy({
-                truncate: true
-            });
+            user.name = name != "" ? name : user.name
+            user.email = email != "" ? email : user.email
+            user.phone = phone != "" ? phone : user.phone
 
+            await user.save()
+
+            return res.status(200).json({
+                status: 200,
+                message: 'User edited successfully',
+                value : UserView.render(user),
+            })
+        } else {
+            return res.status(204).json({ 
+                status: 204,
+                message: 'User not found',
+                value: {},
+            })
+        }
+
+    },
+
+    async deactivate(req, res) {
+        const { id } = req.params;
+
+        const user = await UserModel.findByPk(id)
+
+        await connection.query(`UPDATE users SET is_deleted = true WHERE id = ${id};`, { type: QueryTypes.UPDATE });
+
+        if ( user ) {
             return res.status(200).json({
                 status: 200,
                 message: 'User deleted successfully',
@@ -103,5 +167,28 @@ module.exports = {
                 value: {},
             })
         }
-    }
+    },
+
+    async activate(req, res) {
+        const { id } = req.params;
+
+        const user = await UserModel.findByPk(id)
+
+        await connection.query(`UPDATE users SET is_deleted = false WHERE id = ${id};`, { type: QueryTypes.UPDATE });
+
+        if ( user ) {
+            return res.status(200).json({
+                status: 200,
+                message: 'User activated successfully',
+                value: UserView.render(user)
+            })
+        } else {
+            return res.status(204).json({
+                status: 204,
+                message: 'User not found',
+                value: {},
+            })
+        }
+    },
+
 }

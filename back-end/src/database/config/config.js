@@ -8,4 +8,7 @@ module.exports = {
         timestamps: true,
         underscored: true,
     },
+    dialectOptions: {
+        flags: '-FOUND_ROWS'
+    }
 }

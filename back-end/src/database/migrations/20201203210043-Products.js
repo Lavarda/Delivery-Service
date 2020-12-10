@@ -32,6 +32,11 @@ module.exports = {
         type: Sequelize.BLOB('long'),
         allowNull: false,
       },
+      is_deleted: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true,
+        defaultValue: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

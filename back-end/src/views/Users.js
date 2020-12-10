@@ -2,13 +2,22 @@ const AdressesView = require('../views/Adresses')
 
 module.exports = {
     render (user) {
-        return {
+
+        console.log(user.email)
+
+        let user_view = {
             id: user.id,
             name: user.name,
             email: user.email,
             password: user.password,
             phone: user.phone,
         }
+
+        if ( user.is_deleted ) {
+            user.is_deleted = user.is_deleted
+        }
+
+        return user_view
     },
 
     renderMany(user) {
@@ -16,7 +25,8 @@ module.exports = {
     },
 
     renderUserAdresses(user) {
-        return {
+
+        let user_view = {
             id: user.id,
             name: user.name,
             email: user.email,
@@ -24,6 +34,12 @@ module.exports = {
             phone: user.phone,
             adresses: AdressesView.renderManyAdressesOnUser(user.adresses_user),
         }
+
+        if ( user.is_deleted ) {
+            user.is_deleted = user.is_deleted
+        }
+
+        return user_view
     },
 
     renderManyUsersAdresses(user) {
