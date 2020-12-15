@@ -32,6 +32,10 @@ module.exports = {
         type: Sequelize.BLOB('long'),
         allowNull: false,
       },
+      filename: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       is_deleted: {
         type: Sequelize.BOOLEAN,
         allowNull: true,

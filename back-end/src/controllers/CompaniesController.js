@@ -1,13 +1,16 @@
 const Yup = require('yup')
 const fs = require("fs");
 const path = require('path');
-const { Op } = require('sequelize')
+const { Op, Sequelize, QueryTypes} = require('sequelize')
 
 const CompaniesModel = require('../models/Companies')
 const CompaniesView = require('../views/Companies')
 
 const CategoriesModel = require('../models/Categories')
 const ProductsModel = require('../models/Products')
+
+const databaseConfig = require('../database/config/config')
+const connection = new Sequelize(databaseConfig);
 
 module.exports = {
     async create(req,res) {
@@ -79,6 +82,41 @@ module.exports = {
                 }
             },
             include: [
+                { 
+                    model: CategoriesModel,
+                    as: 'company_category',
+                },
+                { 
+                    model: ProductsModel,
+                    as: 'company_products',
+                }, 
+              ]
+        })
+
+        if ( companies ) {
+            return res.status(200).json({
+                status: 200,
+                message: 'Companies searched successfully',
+                value: CompaniesView.renderManyAssociations(companies),
+            })
+        } else {
+            return res.status(204).json({
+                status: 204,
+                message: 'Companies not found',
+                value: {}
+            })
+        }
+
+    },
+    
+    async listDeactivated(req, res) {
+        const companies = await CompaniesModel.findAll({
+            where: {
+                is_deleted: {
+                    [Op.eq]: true,
+                }
+            },
+            include: [
                 {
                     model: CategoriesModel,
                     as: 'company_category'
@@ -103,11 +141,6 @@ module.exports = {
                 value: {}
             })
         }
-
-    },
-    
-    async listDeactivate(req, res) {
-
     },
 
     async edit(req, res) {
@@ -115,10 +148,46 @@ module.exports = {
     },
 
     async deactivate(req,res) {
+        const { id } = req.params;
 
+        const company = await CompaniesModel.findByPk(id)
+
+        await connection.query(`UPDATE companies SET is_deleted = true WHERE id = ${id};`, { type: QueryTypes.UPDATE });
+
+        if ( company ) {
+            return res.status(200).json({
+                status: 200,
+                message: 'Company deleted successfully',
+                value: CompaniesView.render(company)
+            })
+        } else {
+            return res.status(204).json({
+                status: 204,
+                message: 'Company not found',
+                value: {},
+            })
+        }
     },
 
     async activate(req,res) {
+        const { id } = req.params;
 
+        const company = await CompaniesModel.findByPk(id)
+
+        await connection.query(`UPDATE companies SET is_deleted = false WHERE id = ${id};`, { type: QueryTypes.UPDATE });
+
+        if ( company ) {
+            return res.status(200).json({
+                status: 200,
+                message: 'Company activated successfully',
+                value: CompaniesView.render(company)
+            })
+        } else {
+            return res.status(204).json({
+                status: 204,
+                message: 'Company not found',
+                value: {},
+            })
+        }
     },
 }
